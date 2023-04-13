@@ -1,6 +1,6 @@
-# CompositePatternConsoleApplication
-
-Class Structure
+# Composite Pattern Console Application
+---
+# Class Structure
 The program is written in C# and uses the Composite Design Pattern to represent part-whole hierarchies of file system elements. The program creates a root directory object and provides a menu for users to perform various operations on the file system elements.
 
 FileSystemElement
