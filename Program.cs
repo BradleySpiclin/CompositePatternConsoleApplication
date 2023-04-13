@@ -85,32 +85,20 @@ namespace CompositePattern
                 root.Add(newDirectory);
                 return;
             }
-            var addToRoot = PromptForString("Add to root directory (Press Y): ");
-            if (addToRoot == "Y" || addToRoot == "y")
+            var existingDirectoryName = PromptForString("Enter destination directory name: ");
+            var existingDirectory = FindDirectory(root, existingDirectoryName);
+            if (existingDirectory == null)
             {
-                if (root.HasElementNamed(newDirectory.GetName())) 
-                {
-                    Console.WriteLine($"A directory with this name already exists in the {root.GetName()} directory.");
-                }
-                root.Add(newDirectory);
-                return;
+                Console.WriteLine($"Destination directory does not exist.");
+            }
+            else if (existingDirectory.HasElementNamed(newDirectory.GetName()))
+            {
+                Console.WriteLine($"A directory with this name already exists in the {existingDirectory.GetName()} directory.");
             }
             else
             {
-                var existingDirectoryName = PromptForString("Enter destination directory name: ");
-                var existingDirectory = FindDirectory(root, existingDirectoryName);
-                if (existingDirectory == null)
-                {
-                    Console.WriteLine($"Destination directory does not exist.");
-                }
-                else if (existingDirectory.HasElementNamed(newDirectory.GetName())) 
-                {
-                    Console.WriteLine($"A directory with this name already exists in the {existingDirectory.GetName()} directory.");
-                }
-                else 
-                {
-                    existingDirectory.Add(newDirectory);                          
-                }
+                existingDirectory.Add(newDirectory);
+                return;
             }
             Console.ReadKey();
         }
@@ -122,16 +110,6 @@ namespace CompositePattern
             var directoryToCopy = FindDirectory(root, PromptForString("Directory to copy: "));
             if (directoryToCopy != null) 
             {
-                var userInput = PromptForString("Add to root (Y/N): ");
-                if (userInput == "Y" || userInput == "y" && !root.HasElementNamed(directoryToCopy.GetName()))
-                {
-                    directoryToCopy.CopyTo(root);
-                    return;
-                }
-                else 
-                {
-                    Console.WriteLine($"A directory with this name already exists in the {root.GetName()} directory.");
-                }
                 var destinationDirectory = FindDirectory(root, PromptForString("Desination directory: "));
                 if (destinationDirectory == null) 
                 {
@@ -162,7 +140,7 @@ namespace CompositePattern
                 root.Remove(directoryToRemove);
                 return;
             }
-            else 
+            else
             {
                 Console.WriteLine($"Directory does not exist.");
             }
@@ -179,7 +157,7 @@ namespace CompositePattern
             File file = new File(fileName, fileSize);
             // If we have only the root we have no directory to add to
             // So we add file to root
-            if (root.CountDirectories() == 0 && !root.HasElementNamed(fileName)) 
+            if (root.CountDirectories() == 0) 
             {
                 root.Add(file);
                 return;
@@ -191,7 +169,7 @@ namespace CompositePattern
             }
             else if (directory.HasElementNamed(fileName)) 
             {
-                Console.WriteLine($"A directory with this name already exists in the {directory.GetName()} directory.");
+                Console.WriteLine($"A file with this name already exists in the {directory.GetName()} directory.");
             }
             else 
             {
@@ -296,7 +274,7 @@ namespace CompositePattern
             return null;
         }
         // Returns the parent directory of the specified file, or null if the file is not found
-        static Directory? FindParentDirectory(Directory root, File file)
+        static Directory? FindParentDirectory(Directory root, FileSystemElement file)
         {
             foreach (var element in root.GetElements())
             {
