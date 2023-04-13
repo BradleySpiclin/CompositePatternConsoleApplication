@@ -155,11 +155,10 @@ namespace CompositePattern
             var fileSize = PromptForLong("Enter file size (in bytes): ");
             // Create new File object
             File file = new File(fileName, fileSize);
-            // If we have only the root we have no directory to add to
-            // So we add file to root
+            // If we have no directories we are at root level and add the file
             if (root.CountDirectories() == 0) 
             {
-                root.Add(file);
+                root.Add(file); // Treated as FileSystemElement object
                 return;
             }
             var directory = FindDirectory(root, PromptForString("Enter directory: "));
@@ -173,7 +172,7 @@ namespace CompositePattern
             }
             else 
             {
-                directory.Add(file);
+                directory.Add(file); // Treated as FileSystemElement object
                 return;
             }
             Console.ReadKey();

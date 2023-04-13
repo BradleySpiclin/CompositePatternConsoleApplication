@@ -10,19 +10,24 @@ namespace CompositePattern
     class Directory : FileSystemElement
     {
         // List of child elements
-        private List<FileSystemElement> elements = new List<FileSystemElement>();
+        private List<FileSystemElement> _elements = new List<FileSystemElement>();
+
+        // Constructor
+        public Directory(string name) : base(name)
+        {
+        }
 
         // Get all child elements
         public List<FileSystemElement> GetElements()
         {
-            return elements;
+            return _elements;
         }
 
         // Count the number of directories within this directory
         public int CountDirectories()
         {
             int count = 0;
-            foreach (FileSystemElement element in elements)
+            foreach (FileSystemElement element in _elements)
             {
                 if (element is Directory)
                 {
@@ -33,30 +38,24 @@ namespace CompositePattern
             }
             return count;
         }
-
-        // Constructor
-        public Directory(string name) : base(name)
-        {
-        }
-
         // Add a child element
         public override void Add(FileSystemElement element)
         {
-            elements.Add(element);
+            _elements.Add(element);
         }
 
         // Remove a child element
         public override void Remove(FileSystemElement element)
         {
-            elements.Remove(element);
+            _elements.Remove(element);
         }
 
         // Display the directory and its child elements
         public override void Display(int depth)
         {
-            Console.WriteLine($"{new string('-', depth)}+{name} - {this.GetSize()} bytes - Directory created: {this.dateCreated}");
+            Console.WriteLine($"{new string('-', depth)}+{this._name} - {this.GetSize()} bytes - Directory created: {this.dateCreated}");
             // Recursively display child elements
-            foreach (FileSystemElement element in elements)
+            foreach (FileSystemElement element in _elements)
             {
                 element.Display(depth + 2);
             }
@@ -66,7 +65,7 @@ namespace CompositePattern
         public override long GetSize()
         {
             long size = 0;
-            foreach (FileSystemElement element in elements)
+            foreach (FileSystemElement element in _elements)
             {
                 size += element.GetSize();
             }
@@ -77,10 +76,10 @@ namespace CompositePattern
         public void CopyTo(Directory destination)
         {
             // Create a copy of the directory
-            Directory copy = new Directory(name);
+            Directory copy = new Directory(_name);
 
             // Recursively copy child elements
-            foreach (FileSystemElement element in elements)
+            foreach (FileSystemElement element in _elements)
             {
                 if (element is File)
                 {
@@ -103,7 +102,7 @@ namespace CompositePattern
         // Check if the directory has a child element with the specified name
         public override bool HasElementNamed(string directoryName)
         {
-            foreach (FileSystemElement element in elements)
+            foreach (FileSystemElement element in _elements)
             {
                 if (element is Directory && element.GetName() == directoryName)
                 {
