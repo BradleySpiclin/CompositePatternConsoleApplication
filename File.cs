@@ -39,7 +39,7 @@ namespace CompositePattern
         // The depth parameter is used to determine the indentation level for the file's details.
         public override void Display(int depth)
         {
-            Console.WriteLine($"{new string('-', depth)}{_name} - {this.GetSize()} bytes - File created: {this.dateCreated}");
+            Console.WriteLine($"{new string('-', depth)}{_name} - {this.GetSize()} bytes - File created: {this._dateCreated}");
         }
 
         // Overrides the GetSize method from the base class, to return the size of the file.

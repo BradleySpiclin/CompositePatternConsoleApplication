@@ -10,12 +10,12 @@ namespace CompositePattern
     abstract class FileSystemElement
     {
         protected string _name;
-        protected DateTime dateCreated;
+        protected DateTime _dateCreated;
 
         public FileSystemElement(string name)
         {
             this._name = name;
-            this.dateCreated = DateTime.Now;
+            this._dateCreated = DateTime.Now;
         }
         public string GetName() => _name;
         public abstract void Add(FileSystemElement element);

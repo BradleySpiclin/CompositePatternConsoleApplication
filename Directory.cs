@@ -53,7 +53,7 @@ namespace CompositePattern
         // Display the directory and its child elements
         public override void Display(int depth)
         {
-            Console.WriteLine($"{new string('-', depth)}+{this._name} - {this.GetSize()} bytes - Directory created: {this.dateCreated}");
+            Console.WriteLine($"{new string('-', depth)}+{this._name} - {this.GetSize()} bytes - Directory created: {this._dateCreated}");
             // Recursively display child elements
             foreach (FileSystemElement element in _elements)
             {
