@@ -1,4 +1,4 @@
-#Composite Pattern Console Application
+# Composite Pattern Console Application
 --
 Class Structure
 --
