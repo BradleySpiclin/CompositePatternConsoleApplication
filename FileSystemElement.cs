@@ -14,8 +14,8 @@ namespace CompositePattern
 
         public FileSystemElement(string name)
         {
-            this._name = name;
-            this._dateCreated = DateTime.Now;
+            _name = name;
+            _dateCreated = DateTime.Now;
         }
         public string GetName() => _name;
         public abstract void Add(FileSystemElement element);

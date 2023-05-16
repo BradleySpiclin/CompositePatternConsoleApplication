@@ -20,7 +20,7 @@ namespace CompositePattern
         // Constructor that sets the name and size of the file.
         public File(string name, long size) : base(name)
         {
-            this._size = size;
+            _size = size;
         }
 
         // Overrides the Add method from the base class, as a file cannot have any child elements.
@@ -39,7 +39,7 @@ namespace CompositePattern
         // The depth parameter is used to determine the indentation level for the file's details.
         public override void Display(int depth)
         {
-            Console.WriteLine($"{new string('-', depth)}{_name} - {this.GetSize()} bytes - File created: {this._dateCreated}");
+            Console.WriteLine($"{new string('-', depth)}{_name} - {GetSize()} bytes - File created: {_dateCreated}");
         }
 
         // Overrides the GetSize method from the base class, to return the size of the file.

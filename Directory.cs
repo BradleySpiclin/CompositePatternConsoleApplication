@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CompositePattern
 {
     // The Composite class
-    class Directory : FileSystemElement
+    internal class Directory : FileSystemElement
     {
         // List of child elements
         private List<FileSystemElement> _elements = new List<FileSystemElement>();
@@ -53,7 +53,7 @@ namespace CompositePattern
         // Display the directory and its child elements
         public override void Display(int depth)
         {
-            Console.WriteLine($"{new string('-', depth)}+{this._name} - {this.GetSize()} bytes - Directory created: {this._dateCreated}");
+            Console.WriteLine($"{new string('-', depth)}+{_name} - {GetSize()} bytes - Directory created: {_dateCreated}");
             // Recursively display child elements
             foreach (FileSystemElement element in _elements)
             {
@@ -94,7 +94,6 @@ namespace CompositePattern
                     subdirectory.CopyTo(copy);
                 }
             }
-
             // Add copy to destination directory
             destination.Add(copy);
         }
